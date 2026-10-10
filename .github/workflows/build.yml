@@ -68,11 +68,8 @@ steps:
         --buildNumber="$BUILD_NUMBER" \
         --outputBuildArtifactsPath="build/artifacts"
       test -s build/artifacts/Telegram.ipa
-      echo "Build artifacts:"
+      echo "Generated artifacts:"
       ls -lh build/artifacts
-      if [ ! -f build/artifacts/Telegram.DSYMs.zip ]; then
-        echo "Warning: DSYMs archive was not generated."
-      fi
   - name: Create Release
     id: create_release
     uses: actions/create-release@v1
@@ -97,7 +94,7 @@ steps:
       asset_name: Telegram.ipa
       asset_content_type: application/octet-stream
   - name: Upload Release DSYM
-    if: ${{ hashFiles('build/artifacts/Telegram.DSYMs.zip') != '' }}
+    if: ${{ hashFiles('/Users/Shared/telegram-ios/build/artifacts/Telegram.DSYMs.zip') != '' }}
     uses: actions/upload-release-asset@v1
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
