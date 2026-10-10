@@ -155,7 +155,7 @@ func deleteMessagesInteractively(transaction: Transaction, stateManager: Account
         transaction: transaction,
         mediaBox: postbox.mediaBox,
         ids: messageIds.map(\.messageId),
-        archiveCloudMessages: false
+        archiveCloudMessages: true
     )
     
     stateManager?.notifyDeletedMessages(messageIds: messageIds.map(\.messageId))
